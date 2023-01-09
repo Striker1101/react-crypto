@@ -1,0 +1,11 @@
+.fgt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.fgt > p {
+  font-size: x-large;
+}
+
