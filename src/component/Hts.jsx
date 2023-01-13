@@ -56,8 +56,8 @@ export default function Hts() {
                              of partners in the structure and the accrual of 
                              rewards. Each matrix consists of several levels,
                               to which you can move and get even more profits.
-                               The levels are activated only one by one, one by
-                             one, and the activation of each next
+                               The levels are activated only one by one,
+                                and the activation of each next
                              level will cost twice as much
                               as the previous one.</div>
                         <div id="workclassNameic">

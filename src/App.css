@@ -104,6 +104,7 @@ body {
   position: absolute;
   z-index: 0;
   width: 100%;
+  top: 150px;
 }
 
 #home {
@@ -114,6 +115,18 @@ body {
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 100px;
+}
+#context{
+position: relative;
+bottom: 21px;
+right: 80px;
 }
 
 #logoText {
@@ -126,6 +139,7 @@ body {
   font-family: cool;
   text-shadow: 6px 6px 6px gold;
   z-index: 2;
+  display: flex;
 }
 .regis {
   position: relative;
@@ -197,6 +211,7 @@ body {
   overflow: hidden;
   margin-top: 50px;
 }
+
 .meaningText {
   background-size: cover;
   background-size: cover;

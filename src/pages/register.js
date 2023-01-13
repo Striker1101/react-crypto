@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import RegisterJsx from "../component/registerJsx";
-import { signUpUsername, googleSignUp } from "../firebaseLog";
+import { signUpUsername } from "../firebaseLog";
 import { useNavigate } from "react-router-dom";
 import "../Form.css";
 export default function Register() {
@@ -29,7 +29,6 @@ export default function Register() {
       e.preventDefault();
       clicked();
     });
-    
   }, []);
 
   return (

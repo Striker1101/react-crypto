@@ -2,24 +2,26 @@ import React, { useRef, useState, useEffect } from "react";
 import Coins from "../components/Coins";
 import Plans from "../components/Plans";
 import { addDeposit } from "../../firebaseLog";
-
-import {
-  doc,
-  getDoc,
-  getFirestore,
-} from "firebase/firestore";
+import close from "../../media/close.svg";
+import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { appFirebase as app } from "../../firebaseLog";
+import bitcoin from "../../media/bitcoin.jpeg";
+import dogecoin from "../../media/dogecoin.jpeg";
+import eth from "../../media/eth.jpeg";
+import trnx from "../../media/trnx.jpeg";
 
+import copy from "../../media/copy.svg";
 export default function Deposit() {
+  const userID = JSON.parse(localStorage.getItem("userID"));
   const db = getFirestore(app());
+  const [info, setInfo] = useState(false);
   const [data, setData] = useState(false);
+  // get table data from data base
   async function getUserData() {
-    const docRef = doc(db, "deposit", "data");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setData(docSnap.data().regions);
-    } else {
-    }
+    onSnapshot(doc(db, "deposits", userID), (doc) => {
+      console.log("Current data: ", doc.data());
+      setData(doc.data().regions);
+    });
   }
   useEffect(() => {
     let check = true;
@@ -37,13 +39,17 @@ export default function Deposit() {
   const qrIndex = useRef(null);
   const wallet = [
     //wallets address
-    "wallet btc",
-    "wallet dogecoin",
-    "wallet tron",
-    "wallet eth",
+    "bc1q26zexey8443srz2c0rg7qp2dskjsree7zxmvty",
+    "DDzW69AmjbVDTjHzbvvxovKQYQyXrZtxPn",
+    "TAUqn6FovtNYcXSqrozpgyq1Xv6nieYAF3",
+    "0x8f3aBDA88C22Bd3330c89D3cF2fd5C8B49c34109",
   ];
   const qrImgs = [
     // QR code of all available payment method
+    bitcoin,
+    dogecoin,
+    trnx,
+    eth,
   ];
 
   function handleCoinClick(e) {
@@ -55,9 +61,16 @@ export default function Deposit() {
     setPlans(!plans);
     setqrCode(true);
     amount.current = e.currentTarget.getAttribute("data-amount");
-    addDeposit(coin.current, amount.current);
+    addDeposit(userID, coin.current, amount.current);
   }
 
+  function copied() {
+    setTimeout(() => {
+      var copyText = document.querySelector(".walletAdrress");
+      setInfo(!info);
+      navigator.clipboard.writeText(copyText.textContent);
+    }, 2000);
+  }
   return (
     <div className="one">
       <div
@@ -79,8 +92,11 @@ export default function Deposit() {
             </li>
             <li>pick from the listed Cryptogram package</li>
             <li>wallet address would be provided</li>
+            <li>after payment submit receipt in logs proof</li>
+            <li>credit would reflect in your account as USD max of 2hours</li>
           </ul>
         </div>
+        <div>{info ? <h3>wallet address copied, go make payment</h3> : ""}</div>
         <div
           style={{
             backgroundColor: "wheat",
@@ -106,22 +122,44 @@ export default function Deposit() {
                   cursor: "pointer",
                 }}
               >
-                copy
+                <img
+                  onClick={() => {
+                    copied();
+                  }}
+                  style={{ width: "50px", height: "50px" }}
+                  src={copy}
+                  alt="copy"
+                />
               </p>
               <h4 style={{ textAlign: "center" }}>{coin.current}</h4>
               <p>
-                {amount.current} to {wallet[qrIndex.current]}
+                {amount.current} to{" "}
+                <span className="walletAdrress">
+                  {" "}
+                  {wallet[qrIndex.current]}
+                </span>
               </p>
             </div>
           )}
         </div>
         <div>
           {qrCode ? (
-            <img
-              src={qrImgs[qrIndex.current]}
-              alt=""
-              title="scan code for easy payment"
-            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: "10px",
+              }}
+            >
+              <p>Scan QR Code for easy payment</p>
+              <img
+                src={qrImgs[qrIndex.current]}
+                alt=""
+                title="scan code for easy payment"
+              />
+            </div>
           ) : (
             " "
           )}
@@ -131,7 +169,7 @@ export default function Deposit() {
         style={{
           height: "500px",
           backgroundColor: "wheat",
-          width: 'fit-content',
+          width: "fit-content",
           borderRadius: "20px",
           marginTop: "20px",
         }}
@@ -140,11 +178,11 @@ export default function Deposit() {
           <caption>Deposit Log</caption>
           <thead>
             <tr>
-              
               <th>Coin </th>
               <th>Amount</th>
               <th>Proof</th>
-              <th>status</th>
+              <th>Status</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -152,15 +190,18 @@ export default function Deposit() {
               data.length > 0 ? (
                 <>
                   {data.map((e, i) => {
-                
                     return (
                       <>
                         <tr>
-                          
                           <th> {e.coin}</th>
                           <th>{e.amount}</th>
-                          <th><input type="file" accept="image/*" multiple /></th>
-                          <th>pending</th>
+                          <th>
+                            <input type="file" accept="image/*" multiple />
+                          </th>
+                          <th>{e.status}</th>
+                          <th>
+                            <img src={close} alt="close" />
+                          </th>
                         </tr>
                       </>
                     );
@@ -170,7 +211,7 @@ export default function Deposit() {
                 ""
               )
             ) : (
-              "Loading"
+              <h4>Empthy</h4>
             )}
           </tbody>
         </table>

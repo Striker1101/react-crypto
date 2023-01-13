@@ -17,7 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" index element={<Homepage />} />
         <Route path="/mywallet" element={<MyWallet />} />
-        <Route path="/deposit" element={<Deposit />} />
+        <Route path="/deposit" element={<Deposit  />} />
         <Route path="/withdraw" element={<Withdraw />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

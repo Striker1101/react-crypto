@@ -10,12 +10,12 @@ export default function Meaning() {
         <div className="meaningText">
             <header id="meaningHeader">
 
-                <h1>What is the Crypto Gram</h1>
+                <h1>What is the CryptoGram</h1>
                 <p className="test animation">Gram is a global Cryptocurrency Ecosystem whose
                      members help each other to achieve financial
                       well-being using our tools and algorithm of
                      instant profit distribution on smart contracts.</p>
-                    <p className="test animation" >The Crpyto Gram system belongs to our Community
+                    <p className="test animation" >The CrpytoGram system belongs to our Community
                          and is fully decentralized , which means it is 
                          transparent,
                          secure and resistant to external influences.</p>

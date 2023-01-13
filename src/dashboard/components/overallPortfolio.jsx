@@ -19,17 +19,21 @@ export default function OverallPortfolio() {
     return (
 
     <div style={styled} className='overall'>
-      <p>Overall Portfolio</p>
+      <p style={{textAlign:'center'}}>Overall Portfolio</p>
       <div className='trans'>
         {
             data?
+            <>
+            <h3 style={{textAlign:'center'}}>Here contains both your completed withdraws and active deposits logs</h3>
             <div style={nodata}>
+              
                 <img src={NoData} alt="no transaction" />
                 <div>
-                <p>No transaction yet</p>
+                <p>Opps!! No transaction yet</p>
                 <button><Link to={'/dashboard/deposit'}>Deposit now</Link></button>
                 </div>
                 </div> 
+                </>
             : <div>data here</div>
         }
 

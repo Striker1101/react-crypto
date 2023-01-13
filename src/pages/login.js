@@ -2,12 +2,8 @@ import React, { useEffect } from "react";
 import Log from "../component/Login";
 import "../Form.css";
 import { useNavigate } from "react-router-dom";
-import { signIn, appFirebase,googleSignUp } from "../firebaseLog";
-import {
-  getAuth,
-  onAuthStateChanged,
-} from "firebase/auth";
-
+import { signIn, appFirebase, googleSignUp } from "../firebaseLog";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function Login() {
   const navigator = useNavigate();
@@ -17,9 +13,8 @@ export default function Login() {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
-      console.log(user);
-      navigator('/dashboard')
-
+      navigator("/dashboard");
+      localStorage.setItem("userID", JSON.stringify(uid));
       // ...
     } else {
       // User is signed out

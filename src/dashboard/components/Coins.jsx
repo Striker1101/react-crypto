@@ -24,16 +24,23 @@ export default function Coins({handleClick}) {
     }
     ]
   return (
-    <div style={{display:"flex", gap:'6px', justifyContent: "center",
-    alignItems: 'center', overflow:'hidden',}}>
+    <div
+    
+     style={{display:"flex", 
+     gap:'6px', 
+     justifyContent: "center",
+    alignItems: 'center', 
+    overflow:'hidden',}}>
         {  
          data.map((element, i) => {
                 return(
                     <div
+                    className='coins'
                      data-index ={i}
                      data-name = {element.name}
                     key={i}
-                     style={{width:"100px", border:'2px dashed gold', 
+                     style={{width:"100px", 
+                     border:'2px dashed gold', 
                     borderRadius: '20px 20px', 
                     overflowX:'hidden',
                      display:'flex',

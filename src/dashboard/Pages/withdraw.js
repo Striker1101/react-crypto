@@ -7,12 +7,12 @@ import Earning from "../components/Earning";
 export default function Withdraw() {
   const [ask, setAsk] = useState(true);
   const [toggle, setToggle] = useState(null);
-
+  const [noFund, setNoFund] = useState(false);
   function handleProcess() {
     const bank = document.getElementById("bank").checked;
     const crypto = document.getElementById("crypto").checked;
     if (bank) {
-      setToggle(true);  
+      setToggle(true);
       setAsk(!ask);
     }
     if (crypto) {
@@ -26,7 +26,7 @@ export default function Withdraw() {
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
-        gap:'10px',
+        gap: "10px",
         alignItems: "center",
       }}
     >
@@ -47,6 +47,9 @@ export default function Withdraw() {
         </div>
         <Calculator />
       </div>
+      <div>
+        {noFund ? <div style={{ color: "red" }}>insufficient funds </div> : ""}
+      </div>
       <div
         style={{
           display: "flex",
@@ -61,9 +64,9 @@ export default function Withdraw() {
         {ask ? (
           <Ask handleClick={handleProcess} />
         ) : toggle ? (
-          <Bank />
+          <Bank click={setNoFund}/>
         ) : (
-          <Crypto />
+          <Crypto click={setNoFund} />
         )}
       </div>
     </div>

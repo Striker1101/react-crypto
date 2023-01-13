@@ -60,11 +60,14 @@ export async function signUpUsername(
       // Signed in
 
       const user = userCredential.user;
+
       console.log(user);
       user.displayName = display;
       user.phoneNumber = phoneNumber;
 
-      setDoc(doc(db, "accounts", "log"), {
+      setDoc(doc(db, "deposits", user.uid), {});
+
+      setDoc(doc(db, "accounts", user.uid), {
         log: {
           email: signupemail,
           password: signuppassword,
@@ -109,7 +112,8 @@ export async function googleSignUp() {
       // const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      setDoc(doc(db, "accounts", "log"), {
+      setDoc(doc(db, "deposits", user.uid), {});
+      setDoc(doc(db, "accounts", user.uid), {
         log: {
           email: user.email,
           password: "",
@@ -168,17 +172,19 @@ export async function resetPassword(email) {
       // ..
     });
 }
-export async function addDeposit(coin, amount) {
+export async function addDeposit(document, coin, amount) {
   const timestamp = Timestamp.fromDate(new Date());
   // Add a new document with a generated id.
-  const depositData = doc(db, "deposit", "data");
+  const depositData = doc(db, "deposits", document);
 
   // Atomically add a new region to the "regions" array field.
   await updateDoc(depositData, {
     regions: arrayUnion({
       coin: coin,
       amount: amount,
+      img: "",
       time: timestamp,
+      status: 'pending'
     }),
   })
     .then(() => {
@@ -190,6 +196,7 @@ export async function addDeposit(coin, amount) {
       console.log(error);
     });
 }
+
 
 export async function Logout() {
   const auth = getAuth();

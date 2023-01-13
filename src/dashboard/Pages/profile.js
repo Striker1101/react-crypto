@@ -13,10 +13,11 @@ import { appFirebase as app } from "../../firebaseLog";
 const db = getFirestore(app());
 
 export default function ProfileTag() {
+  const userID = JSON.parse(localStorage.getItem("userID"));
   const [data, setData] = useState(false);
   const navigate = useNavigate();
   async function getUserData() {
-    const docRef = doc(db, "accounts", "log");
+    const docRef = doc(db, "accounts", userID);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       setData(docSnap.data().log);
@@ -61,6 +62,7 @@ export default function ProfileTag() {
           borderRadius: "5px",
           padding: "10px",
           cursor: "pointer",
+          color:'white'
         }}
         onClick={() => {
           Logout();

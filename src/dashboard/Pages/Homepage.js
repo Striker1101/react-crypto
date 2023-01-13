@@ -4,7 +4,7 @@ import Preview from "../components/preview";
 import Analysis from "../components/analysis";
 import CoinWatch from "../components/coinWatch";
 export default function Homepage() {
-  const width = useRef(0);
+  const width = useRef(1000);
 
   return (
     <div className="container">
@@ -12,8 +12,17 @@ export default function Homepage() {
         <Preview />
         <Analysis />
       </div>
-      <TechnocalChat width={width.current} />
-      <CoinWatch />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TechnocalChat width={width.current} />
+        <CoinWatch />
+      </div>
     </div>
   );
 }
