@@ -3,6 +3,7 @@ import Nav from "../component/Nav";
 import Container from "../component/Container";
 import "../App.css";
 export default function Homepage() {
+  localStorage.setItem("key", false);
   useEffect(() => {
     const menuItem = [...document.querySelectorAll(".menu__item")];
 

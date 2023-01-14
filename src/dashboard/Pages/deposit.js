@@ -19,7 +19,6 @@ export default function Deposit() {
   // get table data from data base
   async function getUserData() {
     onSnapshot(doc(db, "deposits", userID), (doc) => {
-      console.log("Current data: ", doc.data());
       setData(doc.data().regions);
     });
   }
@@ -87,11 +86,12 @@ export default function Deposit() {
           <ul>
             <li>
               {" "}
-              choose the cryoto you wish to pay withdrawable
+              choose the crypto you wish to make payment
               <p>note: only use the coins listed below</p>
             </li>
             <li>pick from the listed Cryptogram package</li>
             <li>wallet address would be provided</li>
+            <li>click copy, go over to your wallet paste and deposit</li>
             <li>after payment submit receipt in logs proof</li>
             <li>credit would reflect in your account as USD max of 2hours</li>
           </ul>
@@ -122,14 +122,21 @@ export default function Deposit() {
                   cursor: "pointer",
                 }}
               >
-                <img
+                <div
                   onClick={() => {
                     copied();
                   }}
                   style={{ width: "50px", height: "50px" }}
-                  src={copy}
-                  alt="copy"
-                />
+                >
+                  <img
+                    style={{
+                      width: "46%",
+                    }}
+                    src={copy}
+                    alt="copy"
+                  />
+                  <p>Copy</p>
+                </div>
               </p>
               <h4 style={{ textAlign: "center" }}>{coin.current}</h4>
               <p>

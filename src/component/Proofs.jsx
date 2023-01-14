@@ -46,7 +46,7 @@ export default function Proofs() {
       }}>
         {
             frame.map((e,i)=>{
-                console.log(e)
+                
                 return(
                    <div 
                    key={i} 

@@ -6,7 +6,12 @@ import Protected from "./pages/Protected";
 import FGT from "./pages/FGT";
 import { Routes, Route } from "react-router-dom";
 import Terms from "./component/Terms";
+import { useEffect, useState } from "react";
 function App() {
+  const [dash, setDash] = useState(null);
+  useEffect(() => {
+    setDash(localStorage.getItem("key"));
+  }, []);
   return (
     <Routes>
       <Route path="/" index element={<Homepage />} />
@@ -17,7 +22,7 @@ function App() {
       <Route
         path="/dashboard/*"
         element={
-          <Protected isLoggedIn={true}>
+          <Protected isLoggedIn={dash}>
             <Dashboard />
           </Protected>
         }

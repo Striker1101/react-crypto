@@ -18,6 +18,7 @@ import {
 import {
   setDoc,
   doc,
+  getDoc,
   getFirestore,
   updateDoc,
   arrayUnion,
@@ -112,7 +113,8 @@ export async function googleSignUp() {
       // const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      setDoc(doc(db, "deposits", user.uid), {});
+      check(user.uid);
+
       setDoc(doc(db, "accounts", user.uid), {
         log: {
           email: user.email,
@@ -135,11 +137,11 @@ export async function googleSignUp() {
       const errorCode = error.code;
       const errorMessage = error.message;
       // The email of the user's account used.
-      const email = error.customData.email;
+      // const email = error.customData.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
-      alert(errorCode, errorMessage, email, credential);
+      alert(errorMessage);
     });
 }
 
@@ -184,7 +186,7 @@ export async function addDeposit(document, coin, amount) {
       amount: amount,
       img: "",
       time: timestamp,
-      status: 'pending'
+      status: "pending",
     }),
   })
     .then(() => {
@@ -197,7 +199,6 @@ export async function addDeposit(document, coin, amount) {
     });
 }
 
-
 export async function Logout() {
   const auth = getAuth();
   signOut(auth)
@@ -208,4 +209,21 @@ export async function Logout() {
     .catch((error) => {
       // An error happened.
     });
+}
+async function check(user) {
+  const docRef = doc(db, "deposits", user);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const empthy = docSnap.data();
+    if (
+      Object.keys(empthy).length === 0 &&
+      Object.getPrototypeOf(empthy) === Object.prototype
+    ) {
+      setDoc(doc(db, "deposits", user), {});
+    }
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
 }

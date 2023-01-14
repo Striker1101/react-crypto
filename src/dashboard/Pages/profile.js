@@ -4,11 +4,7 @@ import AccountUpgrade from "../components/AccountUpgrade";
 import { Logout } from "../../firebaseLog";
 import { useNavigate } from "react-router-dom";
 import Profile from "../components/Profile";
-import {
-  doc,
-  getDoc,
-  getFirestore,
-} from"firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { appFirebase as app } from "../../firebaseLog";
 const db = getFirestore(app());
 
@@ -62,11 +58,12 @@ export default function ProfileTag() {
           borderRadius: "5px",
           padding: "10px",
           cursor: "pointer",
-          color:'white'
+          color: "white",
         }}
         onClick={() => {
           Logout();
           navigate("/");
+          localStorage.setItem("key", false);
         }}
       >
         logout
