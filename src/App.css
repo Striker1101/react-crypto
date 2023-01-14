@@ -121,15 +121,19 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  
+  width: 100%;
 }
 #context{
 position: relative;
 bottom: 21px;
 right: 80px;
+height: 400px;
+width: 200px;
+
 }
 
 #logoText {
+  
   position: relative;
   color: rgb(226, 194, 10);
   text-align: center;
@@ -140,6 +144,8 @@ right: 80px;
   text-shadow: 6px 6px 6px gold;
   z-index: 2;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .regis {
   position: relative;
