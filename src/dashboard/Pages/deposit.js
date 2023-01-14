@@ -68,7 +68,7 @@ export default function Deposit() {
       var copyText = document.querySelector(".walletAdrress");
       setInfo(!info);
       navigator.clipboard.writeText(copyText.textContent);
-    }, 2000);
+    }, 1000);
   }
   return (
     <div className="one">
@@ -179,7 +179,9 @@ export default function Deposit() {
           width: "fit-content",
           borderRadius: "20px",
           marginTop: "20px",
+          paddingRight:'30px'
         }}
+        className="depositTable"
       >
         <table style={{ width: "100%", color: "black" }}>
           <caption>Deposit Log</caption>

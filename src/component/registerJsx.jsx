@@ -15,7 +15,8 @@ export default function registerJsx() {
      <main id="mainContent">
         <img className="mainImage" src={img} alt="logo" />
         <div className="mainContainer">
-                You know you need something like this in your life to help you realize your deepest dreams.
+                <p>You know you need something like this in your 
+                life to help you realize your deepest dreams.</p>
                <p>Sign up now, lets get you there</p> 
             <p>You know you want to.</p>
             <form id="Form" >

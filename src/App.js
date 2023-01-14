@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Terms from "./component/Terms";
 import { useEffect, useState } from "react";
 function App() {
-  const [dash, setDash] = useState(null);
+  const [dash, setDash] = useState(false);
   useEffect(() => {
     setDash(localStorage.getItem("key"));
   }, []);
@@ -22,7 +22,7 @@ function App() {
       <Route
         path="/dashboard/*"
         element={
-          <Protected isLoggedIn={dash}>
+          <Protected isLoggedIn={true}>
             <Dashboard />
           </Protected>
         }

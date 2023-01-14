@@ -128,3 +128,8 @@ input:valid {
   border: #111111;
   word-break: keep-all;
 }
+@media (max-width: 400px) {
+  #mainContent {
+    height: 800px;
+  }
+}

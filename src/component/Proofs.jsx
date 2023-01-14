@@ -35,7 +35,7 @@ export default function Proofs() {
         justifyContent:'center',
         flexDirection:'column'
     }}>
-      <h3>What members says about us</h3>
+      <h1>What members says about us</h1>
       <div style={{
         width:'100%',
         display:'flex',
@@ -62,6 +62,15 @@ export default function Proofs() {
                 )
             })
         }
+        </div>
+        <div style={{border:'3px solid white',
+         borderRadius:'20px',
+         color:'white',
+         height:'50px',
+         display:'flex',
+         justifyContent:'center',
+         alignItems:'center' }}>
+            <a href="https://meta-force.space/reviews">See more Review</a>
         </div>
     </div>
   )
