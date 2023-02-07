@@ -5,6 +5,7 @@ body {
   height: max-content;
   width: max-content;
 }
+
 #root {
   border: 0px solid black;
   height: max-content;
@@ -116,24 +117,23 @@ body {
   display: flex;
   flex-direction: column;
 }
-.logo{
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 100%;
+  width: 100vw;
 }
-#context{
-position: relative;
-bottom: 21px;
-right: 80px;
-height: 400px;
-width: 200px;
-
+#context {
+  position: relative;
+  bottom: 21px;
+  right: 80px;
+  height: 400px;
+  width: 200px;
 }
 
 #logoText {
-  
+  width: 100vw;
   position: relative;
   color: rgb(226, 194, 10);
   text-align: center;
@@ -146,6 +146,7 @@ width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 50px;
 }
 .regis {
   position: relative;
@@ -504,6 +505,7 @@ width: 200px;
   flex-direction: column;
   position: relative;
   top: 100px;
+  color: wheat;
 }
 
 .closing {

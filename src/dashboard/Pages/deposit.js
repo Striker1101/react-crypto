@@ -1,15 +1,15 @@
 import React, { useRef, useState, useEffect } from "react";
 import Coins from "../components/Coins";
 import Plans from "../components/Plans";
-import { addDeposit } from "../../firebaseLog";
 import close from "../../media/close.svg";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
-import { appFirebase as app } from "../../firebaseLog";
+import { appFirebase as app , addDeposit, removeDeposit } from "../../firebaseLog";
 import bitcoin from "../../media/bitcoin.jpeg";
 import dogecoin from "../../media/dogecoin.jpeg";
 import eth from "../../media/eth.jpeg";
 import trnx from "../../media/trnx.jpeg";
-
+import pending from '../../media/pending.svg'
+import success from '../../media/sucess.svg'
 import copy from "../../media/copy.svg";
 export default function Deposit() {
   const userID = JSON.parse(localStorage.getItem("userID"));
@@ -50,12 +50,20 @@ export default function Deposit() {
     trnx,
     eth,
   ];
+  function handleDelete(e){
+    let index = e.currentTarget.parentElement.parentElement.getAttribute('data-index')
+    // index in array 
+    let point = data[index]
+
+    removeDeposit(userID, point)
+  }
 
   function handleCoinClick(e) {
     qrIndex.current = e.currentTarget.getAttribute("data-index");
     setCoins(!coins);
     coin.current = e.currentTarget.getAttribute("data-name");
   }
+  
   function handlePlanClick(e) {
     setPlans(!plans);
     setqrCode(true);
@@ -64,11 +72,12 @@ export default function Deposit() {
   }
 
   function copied() {
-    setTimeout(() => {
-      var copyText = document.querySelector(".walletAdrress");
-      setInfo(!info);
-      navigator.clipboard.writeText(copyText.textContent);
-    }, 1000);
+    var range = document.createRange();
+    range.selectNode( document.querySelector(".walletAdrress"));
+    window.getSelection().removeAllRanges(); // clear current selection
+    window.getSelection().addRange(range); // to select text
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();// to deselect
   }
   return (
     <div className="one">
@@ -176,10 +185,9 @@ export default function Deposit() {
         style={{
           height: "500px",
           backgroundColor: "wheat",
-          width: "fit-content",
+          width: "min-content",
           borderRadius: "20px",
-          marginTop: "20px",
-          paddingRight:'30px'
+          marginTop: "20px",    
         }}
         className="depositTable"
       >
@@ -201,15 +209,18 @@ export default function Deposit() {
                   {data.map((e, i) => {
                     return (
                       <>
-                        <tr>
+                        <tr data-index={i} >
                           <th> {e.coin}</th>
                           <th>{e.amount}</th>
                           <th>
                             <input type="file" accept="image/*" multiple />
                           </th>
-                          <th>{e.status}</th>
+                          <th>{
+                            e.status === "pending" ? <img src={pending} alt='pending' title="pending" />:
+                            <img src={success} alt='success' title="success" />
+                            }</th>
                           <th>
-                            <img src={close} alt="close" />
+                            <img onClick={handleDelete} src={close} alt="close" />
                           </th>
                         </tr>
                       </>

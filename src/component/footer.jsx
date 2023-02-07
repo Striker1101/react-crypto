@@ -9,7 +9,10 @@ export default function footer() {
          <video playsInline autoPlay muted loop id="footerVideo">
            <source src={video} type="video/mp4" /> 
          </video>
-         <div className="closing">
+         <div 
+         className="closing"
+         style={{color:'white'}}
+         >
             <img src={logo} alt="footer" />
             <a href="/#hts"><p>How to start</p></a>
            <a href="https://meta-force.space/academy"><p>Academy</p></a>
@@ -19,7 +22,7 @@ export default function footer() {
 
         <div className="end">
           <p>CryptoGram classNameic</p> 
-          <a href="@universal_cryptogram">
+          <a href="https://t.me/u_cryptogram">
             <img src={telegram} alt="Telegram_logo" style={{ width:"50px"}} />
           </a>
         <p>@ 2023 all Reserved</p>

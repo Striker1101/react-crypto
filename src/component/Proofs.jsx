@@ -11,20 +11,20 @@ export default function Proofs() {
             name:'Lindy Shirries'
         },
         {
-            video:'https://www.youtube.com/embed/hEnBGa88rqY',
-            name:'Isaac Joshua Chiroma'
+            video:'https://www.youtube.com/embed/VBUXWW2Llw8',
+            name:'Alexey'
         },
         {
-            video:'https://www.youtube.com/embed/_tD1zLijM3I',
-            name:'Mulalo'
+            video:'https://www.youtube.com/embed/FywgPS5B2pI',
+            name:'Shihan Sumon'
         },
         {
-            video:'https://www.youtube.com/embed/s1qLOHmtzno',
-            name:'Ruth'
+            video:'https://www.youtube.com/embed/-9Dw7vDufuo',
+            name:'Shyam Aharwar'
         },
         {
-            video:'https://www.youtube.com/embed/dqSHWISZZhc',
-            name:'Johnmary'
+            video:'https://www.youtube.com/embed/sJm0kTUfeZo',
+            name:'Irfan Rohyana'
         }
     ]
   return (

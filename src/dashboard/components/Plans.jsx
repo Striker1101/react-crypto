@@ -20,7 +20,7 @@ export default function Plans({handleClick}) {
 },
 {
   name: "premium",
-  per: '1000%',
+  per: '500%',
   amount: '$1500'
 }
   ]

@@ -204,7 +204,7 @@ a:hover {
   border: 2px solid red;
   border-radius: 50px;
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .one {
     flex-direction: column;
   } DDzW69AmjbVDTjHzbvvxovKQYQyXrZtxPn

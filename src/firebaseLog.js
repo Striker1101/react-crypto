@@ -23,6 +23,7 @@ import {
   updateDoc,
   arrayUnion,
   Timestamp,
+  arrayRemove
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -192,6 +193,26 @@ export async function addDeposit(document, coin, amount) {
     .then(() => {
       // Data saved successfully!
       console.log("data saved");
+    })
+    .catch((error) => {
+      // The write failed...
+      console.log(error);
+    });
+}
+
+
+export async function removeDeposit(document, data) {
+  
+  // Add a new document with a generated id.
+  const depositData = doc(db, "deposits", document);
+
+  // Atomically add a new region to the "regions" array field.
+  await updateDoc(depositData, {
+    regions: arrayRemove(data)
+  })
+    .then(() => {
+      // Data saved successfully!
+      console.log("data removed");
     })
     .catch((error) => {
       // The write failed...
