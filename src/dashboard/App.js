@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import TopMarket from "./components/TopMarket";
 import Withdraw from "./Pages/withdraw";
 import Profile from "./Pages/profile";
+import Upgrade from "./Pages/Upgrade";
 export default function App() {
   return (
     <div style={{ width: "100vw" }}>
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/deposit" element={<Deposit  />} />
         <Route path="/withdraw" element={<Withdraw />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/upgrade" element={<Upgrade />} />
       </Routes>
       <Helmet>
         <script

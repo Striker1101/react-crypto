@@ -199,6 +199,24 @@ a:hover {
   flex-direction: column;
   align-items: center;
 }
+.upgrade {
+  transition: transform ease-in;
+}
+.upgrade:hover {
+  transform: scale(0.9);
+}
+.updateCover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
+}
+.updateCard {
+  width: 80%;
+}
+.updateCard strong {
+  color: gold;
+}
 .coins :hover {
   width: 80px;
   border: 2px solid red;
@@ -207,8 +225,8 @@ a:hover {
 @media (max-width: 700px) {
   .one {
     flex-direction: column;
-  } DDzW69AmjbVDTjHzbvvxovKQYQyXrZtxPn
-  .depositTable{
+  }
+  DDzW69AmjbVDTjHzbvvxovKQYQyXrZtxPn .depositTable {
     margin-left: 102px;
   }
 }

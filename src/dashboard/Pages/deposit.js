@@ -2,14 +2,19 @@ import React, { useRef, useState, useEffect } from "react";
 import Coins from "../components/Coins";
 import Plans from "../components/Plans";
 import close from "../../media/close.svg";
+import Button from '@mui/material/Button';
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
-import { appFirebase as app , addDeposit, removeDeposit } from "../../firebaseLog";
+import {
+  appFirebase as app,
+  addDeposit,
+  removeDeposit,
+} from "../../firebaseLog";
 import bitcoin from "../../media/bitcoin.jpeg";
 import dogecoin from "../../media/dogecoin.jpeg";
 import eth from "../../media/eth.jpeg";
 import trnx from "../../media/trnx.jpeg";
-import pending from '../../media/pending.svg'
-import success from '../../media/sucess.svg'
+import pending from "../../media/pending.svg";
+import success from "../../media/sucess.svg";
 import copy from "../../media/copy.svg";
 export default function Deposit() {
   const userID = JSON.parse(localStorage.getItem("userID"));
@@ -50,12 +55,13 @@ export default function Deposit() {
     trnx,
     eth,
   ];
-  function handleDelete(e){
-    let index = e.currentTarget.parentElement.parentElement.getAttribute('data-index')
-    // index in array 
-    let point = data[index]
+  function handleDelete(e) {
+    let index =
+      e.currentTarget.parentElement.parentElement.getAttribute("data-index");
+    // index in array
+    let point = data[index];
 
-    removeDeposit(userID, point)
+    removeDeposit(userID, point);
   }
 
   function handleCoinClick(e) {
@@ -63,7 +69,7 @@ export default function Deposit() {
     setCoins(!coins);
     coin.current = e.currentTarget.getAttribute("data-name");
   }
-  
+
   function handlePlanClick(e) {
     setPlans(!plans);
     setqrCode(true);
@@ -73,11 +79,11 @@ export default function Deposit() {
 
   function copied() {
     var range = document.createRange();
-    range.selectNode( document.querySelector(".walletAdrress"));
+    range.selectNode(document.querySelector(".walletAdrress"));
     window.getSelection().removeAllRanges(); // clear current selection
     window.getSelection().addRange(range); // to select text
     document.execCommand("copy");
-    window.getSelection().removeAllRanges();// to deselect
+    window.getSelection().removeAllRanges(); // to deselect
   }
   return (
     <div className="one">
@@ -183,11 +189,11 @@ export default function Deposit() {
       </div>
       <div
         style={{
-          height: "500px",
+          minHeight: "300px",
           backgroundColor: "wheat",
           width: "min-content",
           borderRadius: "20px",
-          marginTop: "20px",    
+          marginTop: "20px",
         }}
         className="depositTable"
       >
@@ -209,18 +215,42 @@ export default function Deposit() {
                   {data.map((e, i) => {
                     return (
                       <>
-                        <tr data-index={i} >
+                        <tr data-index={i}>
                           <th> {e.coin}</th>
                           <th>{e.amount}</th>
                           <th>
-                            <input type="file" accept="image/*" multiple />
+                            <Button variant="contained" component="label">
+                              Upload
+                              <input
+                                hidden
+                                accept="image/*"
+                                multiple
+                                type="file"
+                              />
+                            </Button>
                           </th>
-                          <th>{
-                            e.status === "pending" ? <img src={pending} alt='pending' title="pending" />:
-                            <img src={success} alt='success' title="success" />
-                            }</th>
                           <th>
-                            <img onClick={handleDelete} src={close} alt="close" />
+                            {e.status === "pending" ? (
+                              <img
+                                src={pending}
+                                alt="pending"
+                                title="pending"
+                              />
+                            ) : (
+                              <img
+                                src={success}
+                                alt="success"
+                                title="success"
+                              />
+                            )}
+                          </th>
+                          <th style={{ cursor: "pointer" }}>
+                            <img
+                              onClick={handleDelete}
+                              src={close}
+                              alt="close"
+                              title="Delete"
+                            />
                           </th>
                         </tr>
                       </>
