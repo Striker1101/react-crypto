@@ -4,10 +4,45 @@ import Crypto from "../components/Crypto";
 import Bank from "../components/Bank";
 import Calculator from "../components/Calculator";
 import Earning from "../components/Earning";
-export default function Withdraw() {
+import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
+export default function Withdraw({ data }) {
   const [ask, setAsk] = useState(true);
   const [toggle, setToggle] = useState(null);
-  const [noFund, setNoFund] = useState(false);
+  const [reply, setReply] = useState(false);
+  const [bank, setBank] = useState({
+    id: uuidv4(),
+    amount: 0,
+    name: "",
+    user: "",
+    accountNum: "",
+    zip: "",
+    postaCode: "",
+  });
+  const [crypto, setCrypto] = useState({
+    id: uuidv4(),
+    amount: "",
+    coin: "",
+    address: "",
+  });
+
+  function handleCryptoSubmit(e) {
+    const target = e.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+    setCrypto({
+      [name]: value,
+    });
+  }
+  function handleBankSubmit(e) {
+    const target = e.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    setBank({
+      [name]: value,
+    });
+  }
   function handleProcess() {
     const bank = document.getElementById("bank").checked;
     const crypto = document.getElementById("crypto").checked;
@@ -28,18 +63,19 @@ export default function Withdraw() {
         flexDirection: "column",
         gap: "10px",
         alignItems: "center",
+        position: "relative",
       }}
     >
       <div className="one">
         <div>
           <Earning
-            amount={"0.00"}
+            amount={data.earning}
             topStat={"Earning"}
             color={"blue"}
             state={"withdrawable"}
           />
           <Earning
-            amount={"0.00"}
+            amount={data.deposit}
             topStat={"saving"}
             color={"green"}
             state={"current"}
@@ -48,7 +84,44 @@ export default function Withdraw() {
         <Calculator />
       </div>
       <div>
-        {noFund ? <div style={{ color: "red" }}>insufficient funds </div> : ""}
+        {reply && (
+          <div className="replyA">
+            {parseFloat(data.earning) !== 0 ? (
+              <div style={{ width: "80%" }}>
+                {toggle ? (
+                  <p>
+                    Your Transaction with {bank.id} of {bank.amount} has been
+                    submitted and is been processed, please check {bank.name}{" "}
+                    with account number of {bank.accountNum} for update on your
+                    payment
+                  </p>
+                ) : (
+                  <p>
+                    {" "}
+                    Your Transaction with {crypto.id} of {crypto.amount} is
+                    being processed{" "}
+                  </p>
+                )}
+                <h3> Note</h3>
+                <h5>
+                  {" "}
+                  Maximum processing time is 24 hours, if you have any futher
+                  issues please drop a message with our customer care
+                </h5>
+                <button onClick={() => setReply(!reply)}>Go Back</button>
+              </div>
+            ) : (
+              <div>
+                <h2 style={{ color: "red" }}>INSUFFICIENT FUNDS</h2>
+                <p>
+                  Click <Link to={"/dashboard/deposit"}>here</Link> to make
+                  deposit
+                </p>
+                <button onClick={() => setReply(!reply)}>Go Back</button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div
         style={{
@@ -64,9 +137,9 @@ export default function Withdraw() {
         {ask ? (
           <Ask handleClick={handleProcess} />
         ) : toggle ? (
-          <Bank click={setNoFund}/>
+          <Bank click={setReply} handle={handleBankSubmit} />
         ) : (
-          <Crypto click={setNoFund} />
+          <Crypto click={setReply} handle={handleCryptoSubmit} />
         )}
       </div>
     </div>

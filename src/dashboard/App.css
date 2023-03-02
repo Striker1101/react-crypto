@@ -181,6 +181,7 @@ a:hover {
   gap: 10px;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .two {
   display: flex;
@@ -221,6 +222,18 @@ a:hover {
   width: 80px;
   border: 2px solid red;
   border-radius: 50px;
+}
+.replyA {
+  position: absolute;
+  height: 105vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 @media (max-width: 700px) {
   .one {

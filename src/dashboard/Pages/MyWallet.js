@@ -1,18 +1,18 @@
 import React from "react";
 import Earning from "../components/Earning";
 import OverallPortfolio from "../components/overallPortfolio";
-export default function Homepage() {
+export default function Homepage({ data }) {
   return (
     <div className="container">
       <div className="one">
         <Earning
-          amount={"0.00"}
+          amount={data.earning}
           topStat={"Earning"}
           color={"blue"}
           state={"withdrawable"}
         />
         <Earning
-          amount={"0.00"}
+          amount={data.deposit}
           topStat={"Active deposit"}
           color={"green"}
           state={"locked"}

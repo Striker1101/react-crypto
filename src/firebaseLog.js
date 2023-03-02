@@ -23,7 +23,7 @@ import {
   updateDoc,
   arrayUnion,
   Timestamp,
-  arrayRemove
+  arrayRemove,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -81,6 +81,9 @@ export async function signUpUsername(
           guest: user.isAnonymous,
           created: user.reloadUserInfo.createdAt,
           time: timestamp,
+          accountType: "Basic",
+          earning: "0.00",
+          deposit: "0.00",
         },
       });
 
@@ -114,28 +117,11 @@ export async function googleSignUp() {
       // const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      check(user.uid);
-
-      setDoc(doc(db, "accounts", user.uid), {
-        log: {
-          email: user.email,
-          password: "",
-          username: user.displayName,
-          phoneNumber: user.phoneNumber,
-          country: "",
-          photo: user.photoURL,
-          verified: user.emailVerified,
-          guest: user.isAnonymous,
-          created: user.reloadUserInfo.createdAt,
-          time: timestamp,
-        },
-      });
-
+      check(user);
       // ...
     })
     .catch((error) => {
       // Handle Errors here.
-      const errorCode = error.code;
       const errorMessage = error.message;
       // The email of the user's account used.
       // const email = error.customData.email;
@@ -155,9 +141,8 @@ export async function signIn(email, password) {
       // ...
     })
     .catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorCode, errorMessage);
+      alert(errorMessage);
     });
 }
 
@@ -200,15 +185,13 @@ export async function addDeposit(document, coin, amount) {
     });
 }
 
-
 export async function removeDeposit(document, data) {
-  
   // Add a new document with a generated id.
   const depositData = doc(db, "deposits", document);
 
   // Atomically add a new region to the "regions" array field.
   await updateDoc(depositData, {
-    regions: arrayRemove(data)
+    regions: arrayRemove(data),
   })
     .then(() => {
       // Data saved successfully!
@@ -232,7 +215,7 @@ export async function Logout() {
     });
 }
 async function check(user) {
-  const docRef = doc(db, "deposits", user);
+  const docRef = doc(db, "deposits", user.uid);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
@@ -241,10 +224,38 @@ async function check(user) {
       Object.keys(empthy).length === 0 &&
       Object.getPrototypeOf(empthy) === Object.prototype
     ) {
-      setDoc(doc(db, "deposits", user), {});
+      setDoc(doc(db, "deposits", user.uid), {});
+      setDoc(doc(db, "accounts", user.uid), {
+        log: {
+          email: user.email,
+          password: "",
+          username: user.displayName,
+          phoneNumber: user.phoneNumber,
+          country: "",
+          photo: user.photoURL,
+          verified: user.emailVerified,
+          guest: user.isAnonymous,
+        },
+      });
     }
   } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
+    // doc.data() will be undefined in this case+
+    setDoc(doc(db, "accounts", user.uid), {
+      log: {
+        email: user.email,
+        password: "",
+        username: user.displayName,
+        phoneNumber: user.phoneNumber,
+        country: "",
+        photo: user.photoURL,
+        verified: user.emailVerified,
+        guest: user.isAnonymous,
+        created: user.reloadUserInfo.createdAt,
+        time: timestamp,
+        accountType: "Basic",
+        earning: "0.00",
+        deposit: "0.00",
+      },
+    });
   }
 }

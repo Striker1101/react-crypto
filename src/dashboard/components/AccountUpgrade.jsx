@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export default function AccountUpgrade() {
+export default function AccountUpgrade({ type }) {
   return (
     <div
       style={{
@@ -16,7 +16,7 @@ export default function AccountUpgrade() {
           <h3>Account upgrade</h3>
         </span>
         <p style={{ color: "green" }}>Package due : </p>
-        <span> none</span>
+        <span>{type}</span>
       </div>
       <Link to={"/dashboard/upgrade"}>
         <button type="submit" style={{ float: "right" }}>
