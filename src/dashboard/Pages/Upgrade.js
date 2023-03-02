@@ -9,11 +9,11 @@ export default function Upgrade() {
     {
       name: "Premium",
       write:
-        "Upgrade to our Premium Package and unlock a world of possibilities in the crypto market. Enjoy Lower trading fees, higher withdrawal limits, and priority customer server for a seamless and stress-free investment experience",
+        "Upgrade to our Premium Package and unlock a world of possibilities in the crypto market. Enjoy Lower trading fees, higher withdrawal limits, and priority customer server for a seamless and stress-free investment experience.",
       list: [
-        "Stay ahead of the curves in the ever-evolving world of crypto, our premium package gives you access to new cryptocurrencies, cutting edge technology, and exclusive investment opportunities",
-        "Take the guess work out of crypto investing and get exclusive insights and analytics with expect guidance from our top traders",
-        "Enjoy access to real time marketing data and personalized support to take your investment to the next level",
+        "Stay ahead of the curves in the ever-evolving world of crypto, our premium package gives you access to new cryptocurrencies, cutting edge technology, and exclusive investment opportunities.",
+        "Take the guess work out of crypto investing and get exclusive insights and analytics with expect guidance from our top traders.",
+        "Enjoy access to real time marketing data and personalized support to take your investment to the next level.",
       ],
       amount: 1000,
       per: 1000,
@@ -21,11 +21,11 @@ export default function Upgrade() {
     {
       name: "Gold",
       write:
-        "Upgrade to our gold plan and enjoy lower trading fees, hoger withdrawal limits, and priority customer service, as well as premium features like automated trading , advanced trading, advanced charting tools and much more",
+        "Upgrade to our gold plan and enjoy lower trading fees, hoger withdrawal limits, and priority customer service., as well as premium features like automated trading , advanced trading, advanced charting tools and much more",
       list: [
-        "Invest like a pro with our gold plan, Benefiting from personalized portfolio management, in-depth market research, and customized investment strategies tailored to your unique goals and risk tolerance",
-        "Unlock the full potential of crypto market, get access to exclusive investment opportunities, early access to new cryptocurrencies, and expert analysis to help you make informed decisions",
-        "Enjoy advance trading tools, real-time market data, and personalized support to help you make the most of your investments",
+        "Invest like a pro with our gold plan, Benefiting from personalized portfolio management, in-depth market research, and customized investment strategies tailored to your unique goals and risk tolerance.",
+        "Unlock the full potential of crypto market, get access to exclusive investment opportunities, early access to new cryptocurrencies, and expert analysis to help you make informed decisions.",
+        "Enjoy advance trading tools, real-time market data, and personalized support to help you make the most of your investments.",
       ],
       amount: 500,
       per: 500,
@@ -33,11 +33,11 @@ export default function Upgrade() {
     {
       name: "Silver",
       write:
-        "Upgrade to our silver package and enjoy more advanced features than our Bronze package, including real-time price alerts, customizable watchlists, and accesss to a wider range of cryptocurriences",
+        "Upgrade to our silver package and enjoy more advanced features than our Bronze package, including real-time price alerts, customizable watchlists, and accesss to a wider range of cryptocurriences.",
       list: [
-        "Want to dip your toes into the exciting world of crypto without rsking too much? we have got you - our silver package offers a modest investment amount with potential for high returns, making it a great option for cautious investors",
-        "Get more bang for your buck, enjoy lower trading fees, higher withdraws limits, and priority customer service compared to out free package, without breaking the bank",
-        "Looking for an affordable way to start cypto, we got you covered, our silver plan is perfect for begineers and easy to use trading tools are provided by us with basic market data and helpful educational resources to get you started and moving",
+        "Want to dip your toes into the exciting world of crypto without rsking too much? we have got you - our silver package offers a modest investment amount with potential for high returns, making it a great option for cautious investors.",
+        "Get more bang for your buck, enjoy lower trading fees, higher withdraws limits, and priority customer service compared to out free package, without breaking the bank.",
+        "Looking for an affordable way to start cypto, we got you covered, our silver plan is perfect for begineers and easy to use trading tools are provided by us with basic market data and helpful educational resources to get you started and moving.",
       ],
       amount: 200,
       per: 200,
@@ -45,11 +45,11 @@ export default function Upgrade() {
     {
       name: "Bronze",
       write:
-        "Upgrade to our Bronze plan and enjoy more features, including more detailed market data, and the ability to trade with higher limit",
+        "Upgrade to our Bronze plan and enjoy more features, including more detailed market data, and the ability to trade with higher limit.",
       list: [
-        "Take your first step towards finicial freedom with our bronze package, with a modest investment amount and the potential for high returns, its a great way to get started in the exciting world of cryto, and we can show you all about it here",
-        "Invest in your future, and enjoy lower trading fees and benefits from our educational resources and support to help you build your knowledge and confidence in the crypto market",
-        "Enjoy basic trading tools, real time market data, and access to a limited range of cryptocurriences to help you start building yout portfolio",
+        "Take your first step towards finicial freedom with our bronze package, with a modest investment amount and the potential for high returns, its a great way to get started in the exciting world of cryto, and we can show you all about it here.",
+        "Invest in your future, and enjoy lower trading fees and benefits from our educational resources and support to help you build your knowledge and confidence in the crypto market.",
+        "Enjoy basic trading tools, real time market data, and access to a limited range of cryptocurriences to help you start building yout portfolio.",
       ],
       amount: 20,
       per: 100,
