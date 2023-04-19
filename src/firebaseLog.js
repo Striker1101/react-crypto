@@ -67,7 +67,9 @@ export async function signUpUsername(
       user.displayName = display;
       user.phoneNumber = phoneNumber;
 
-      setDoc(doc(db, "deposits", user.uid), {});
+      setDoc(doc(db, "deposits", user.uid), { regions: [] });
+
+      setDoc(doc(db, "withdraw", user.uid), { regions: [] });
 
       setDoc(doc(db, "accounts", user.uid), {
         log: {
@@ -137,7 +139,7 @@ export async function signIn(email, password) {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log(user);
+      // TODO alert weloome user
       // ...
     })
     .catch((error) => {
@@ -224,7 +226,6 @@ async function check(user) {
       Object.keys(empthy).length === 0 &&
       Object.getPrototypeOf(empthy) === Object.prototype
     ) {
-      setDoc(doc(db, "deposits", user.uid), {});
       setDoc(doc(db, "accounts", user.uid), {
         log: {
           email: user.email,
@@ -240,6 +241,8 @@ async function check(user) {
     }
   } else {
     // doc.data() will be undefined in this case+
+    setDoc(doc(db, "deposits", user.uid), { regions: [] });
+    setDoc(doc(db, "withdraw", user.uid), { regions: [] });
     setDoc(doc(db, "accounts", user.uid), {
       log: {
         email: user.email,
