@@ -1,9 +1,6 @@
 import React from "react";
 
-export default function Crypto({ click, handle }) {
-  function submit() {
-    click(true);
-  }
+export default function Crypto({ click, submit }) {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <form
@@ -20,7 +17,7 @@ export default function Crypto({ click, handle }) {
           Amount{" "}
           <span style={{ background: "gold", borderRadius: "3px" }}>USD:</span>
           <input
-            onChange={handle}
+            onChange={click}
             type="number"
             name="amount"
             id="amount"
@@ -29,11 +26,11 @@ export default function Crypto({ click, handle }) {
         </label>
         <label htmlFor="crypto">
           CryptoCurrency
-          <input onChange={handle} type="text" name="coin" id="coin" />
+          <input onChange={click} type="text" name="coin" id="coin" />
         </label>
         <label htmlFor="address">
           Address
-          <input onChange={handle} type="text" name="address" id="address" />
+          <input onChange={click} type="text" name="address" id="address" />
         </label>
         <input type="submit" value="submit" />
       </form>

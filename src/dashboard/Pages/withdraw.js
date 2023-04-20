@@ -32,12 +32,14 @@ export default function Withdraw({ data }) {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     setCrypto({
+      ...crypto,
       [name]: value,
     });
   }
   function handleBankSubmit(e) {
     e.preventDefault();
     if (bank.amount && bank.name && bank.user && bank.amount > 0) {
+      window.scrollTo(0, 0);
       setReply(!reply);
     } else {
       //
@@ -47,6 +49,7 @@ export default function Withdraw({ data }) {
   function handleCryptoSubmit(e) {
     e.preventDefault();
     if (crypto.address && crypto.coin) {
+      window.scrollTo(0, 0);
       setReply(!reply);
     } else {
       alert("please enter your details");

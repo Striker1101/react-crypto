@@ -25,7 +25,7 @@ export default function Ask({handleClick}) {
             </label>
         </li>
       </ul>
-      <button type="submit" onClick={()=>{  handleClick()}}>proceed</button>
+      <button style={{borderRadius:"30px", boxShadow:"2px .5px 1px 1px black" }} type="submit" onClick={()=>{  handleClick()}}>Proceed</button>
     </div>
   )
 }
