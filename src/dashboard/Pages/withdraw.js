@@ -10,6 +10,7 @@ export default function Withdraw({ data }) {
   const [ask, setAsk] = useState(true);
   const [toggle, setToggle] = useState(null);
   const [reply, setReply] = useState(false);
+  const [country, setCountry] = useState(false);
   const [bank, setBank] = useState({
     id: uuidv4(),
     amount: 0,
@@ -26,7 +27,7 @@ export default function Withdraw({ data }) {
     address: "",
   });
 
-  function handleCryptoSubmit(e) {
+  function handleCryptoClick(e) {
     const target = e.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
@@ -35,11 +36,28 @@ export default function Withdraw({ data }) {
     });
   }
   function handleBankSubmit(e) {
+    e.preventDefault();
+    if (bank.amount && bank.name && bank.user && bank.amount > 0) {
+      setReply(!reply);
+    } else {
+      //
+      alert("please input details ");
+    }
+  }
+  function handleCryptoSubmit(e) {
+    e.preventDefault();
+    if (crypto.address && crypto.coin) {
+      setReply(!reply);
+    } else {
+      alert("please enter your details");
+    }
+  }
+  function handleBankClick(e) {
     const target = e.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
-
     setBank({
+      ...bank,
       [name]: value,
     });
   }
@@ -137,9 +155,15 @@ export default function Withdraw({ data }) {
         {ask ? (
           <Ask handleClick={handleProcess} />
         ) : toggle ? (
-          <Bank click={setReply} handle={handleBankSubmit} />
+          <Bank
+            submit={handleBankSubmit}
+            click={handleBankClick}
+            setCountry={setCountry}
+            country={country}
+            bank={bank}
+          />
         ) : (
-          <Crypto click={setReply} handle={handleCryptoSubmit} />
+          <Crypto submit={handleCryptoSubmit} click={handleCryptoClick} />
         )}
       </div>
     </div>

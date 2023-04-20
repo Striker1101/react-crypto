@@ -1,13 +1,10 @@
 import React from "react";
 import CountryList from "./CountryList";
-export default function Bank({ click, handle }) {
+export default function Bank({ click, setCountry, country, submit, bank }) {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <form
-        onSubmit={(e) => {
-          click(true);
-          e.preventDefault();
-        }}
+        onSubmit={submit}
         action="#"
         style={{
           display: "flex",
@@ -18,43 +15,73 @@ export default function Bank({ click, handle }) {
         }}
       >
         <h3 style={{ textAlign: "center" }}>Fill the form correctly</h3>
-        <CountryList />
+        <CountryList click={click} setCountry={setCountry} country={country} />
         <label htmlFor="amount">
           Amount{" "}
           <span style={{ background: "gold", borderRadius: "3px" }}>USD:</span>
           <input
-            onChange={handle}
+            onChange={click}
             type="number"
             name="amount"
             id="amount"
+            value={bank.amount}
             min={100}
           />
         </label>
 
         <label htmlFor="name">
           Bank Name
-          <input onChange={handle} type="text" name="name" id="name" />
+          <input
+            value={bank.name}
+            onChange={click}
+            type="text"
+            name="name"
+            id="name"
+          />
         </label>
+
         <label htmlFor="Bankuser">
           Account User
-          <input onChange={handle} type="text" name="user" id="user" />
+          <input
+            vlue={bank.user}
+            onChange={click}
+            type="text"
+            name="user"
+            id="user"
+          />
         </label>
+
         <label htmlFor="accountNum">
           Account Number
           <input
-            onChange={handle}
+            onChange={click}
             type="number"
+            value={bank.accountNum}
             name="accountNum"
             id="accountNum"
           />
         </label>
+
         <label htmlFor="zipCode">
           Zip Code
-          <input onChange={handle} type="number" name="zip" id="zip" />
+          <input
+            value={bank.zip}
+            onChange={click}
+            type="number"
+            name="zip"
+            id="zip"
+          />
         </label>
+
         <label htmlFor="postalCode">
           Postal Code
-          <input onChange={handle} type="number" name="postaCode" id="postal" />
+          <input
+            onChange={click}
+            type="number"
+            name="postalCode"
+            id="postalCode"
+            value={bank.postalCode}
+          />
         </label>
         <input type="submit" value="submit" />
       </form>
