@@ -23,7 +23,7 @@ export default function Withdraw({ data }) {
   const [crypto, setCrypto] = useState({
     id: uuidv4(),
     amount: "",
-    coin: "",
+    coin: "bitcoin",
     address: "",
   });
 
