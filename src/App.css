@@ -249,6 +249,7 @@ body {
 #meaningHeader > .note {
   border: 3px solid transparent;
   border-radius: 15px;
+  padding: 10px !important;
   background-color: #8b5d28;
 }
 .classNameicnest > ul {
