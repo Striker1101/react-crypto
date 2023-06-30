@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Coins from "../components/Coins";
 import Plans from "../components/Plans";
 import close from "../../media/close.svg";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import {
   appFirebase as app,
@@ -16,6 +16,7 @@ import trnx from "../../media/trnx.jpeg";
 import pending from "../../media/pending.svg";
 import success from "../../media/sucess.svg";
 import copy from "../../media/copy.svg";
+import empthy from "../../media/empthy.svg";
 export default function Deposit() {
   const userID = JSON.parse(localStorage.getItem("userID"));
   const db = getFirestore(app());
@@ -127,13 +128,12 @@ export default function Deposit() {
           ) : plans ? (
             <Plans handleClick={handlePlanClick} />
           ) : (
-            <div>
+            <div style={{ padding: "10px" }}>
               <p
                 style={{
                   float: "right",
                   width: "fit-content",
                   background: "orange",
-                  padding: "10px",
                   cursor: "pointer",
                 }}
               >
@@ -145,12 +145,13 @@ export default function Deposit() {
                 >
                   <img
                     style={{
-                      width: "46%",
+                      width: "100%",
+                      padding: "5px",
                     }}
                     src={copy}
                     alt="copy"
+                    title="copy"
                   />
-                  <p>Copy</p>
                 </div>
               </p>
               <h4 style={{ textAlign: "center" }}>{coin.current}</h4>
@@ -261,7 +262,9 @@ export default function Deposit() {
                 ""
               )
             ) : (
-              <h4>Empthy</h4>
+              <div style={{ width: "100%" }}>
+                <img style={{ width: "500%" }} src={empthy} alt="empthy" />
+              </div>
             )}
           </tbody>
         </table>

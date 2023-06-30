@@ -144,7 +144,7 @@ export default function Upgrade() {
                 }}
               >
                 <h2 style={{ color: "gold" }}>{list.name}</h2>
-                <p style={{ color: "black" }}> ${list.amount}</p>
+                <p style={{ color: "green" }}> ${list.amount}</p>
               </div>
             );
           })}
