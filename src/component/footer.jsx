@@ -22,7 +22,7 @@ export default function footer() {
 
         <div className="end">
           <p>CryptoGram classNameic</p> 
-          <a href="https://t.me/u_cryptogram">
+          <a href="https://t.me/+iDzbklldl1xkYzAx">
             <img src={telegram} alt="Telegram_logo" style={{ width:"50px"}} />
           </a>
         <p>@ 2023 all Reserved</p>

@@ -1,7 +1,7 @@
 :root {
   --header: 3rem;
   --footer: 40px;
-  --main: calc(100vh - calc(var(--header) + var(--footer)));
+  /* --main: calc(100vh - calc(var(--header) + var(--footer))); */
   --border-btn: 2px solid gold;
   --color-base-bg: #7a7a7a;
   --color-base-text: antiquewhite;
@@ -21,13 +21,11 @@
 body {
   margin: 0;
   padding: 0;
-  border: 0px solid transparent;
   background: var(--color-base-bg);
   width: 100vw;
 }
 
 #container {
-  border: 0px solid transparent;
   color: white;
 }
 
@@ -56,6 +54,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: auto;
   justify-content: center;
   color: var(--color-base-text);
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -90,19 +89,31 @@ img {
   flex-direction: column;
   gap: 5px;
 }
+
+#Form > label {
+  display: flex;
+  gap: 10px;
+}
+
+#form > label > input {
+  width: 100%;
+  height: 30px;
+  border: 2px solid red;
+}
 .submit {
   border: var(--border-btn);
   border-radius: 20px;
-  margin: 10px;
+  padding: 10px;
   background-color: var(--color-btn-bg);
   color: var(--color-base-text);
-  width: 50px;
+  width: fit-content;
 }
 .inputs {
   margin: 0 10px;
 }
 input {
   border-radius: 10px;
+  padding-left: 10px;
 }
 input:invalid {
   border-color: var(--border-btn);
@@ -128,8 +139,9 @@ input:valid {
   border: #111111;
   word-break: keep-all;
 }
-@media (max-width: 400px) {
-  #mainContent {
-    height: 800px;
+@media (max-width: 700px) {
+  #Form > label {
+    flex-direction: column;
+    gap: 2px;
   }
 }
