@@ -15,8 +15,8 @@ export default function Upgrade() {
         "Take the guess work out of crypto investing and get exclusive insights and analytics with expect guidance from our top traders.",
         "Enjoy access to real time marketing data and personalized support to take your investment to the next level.",
       ],
-      amount: 1000,
-      per: 1000,
+      amount: 15000,
+      per: 200,
     },
     {
       name: "Gold",
@@ -27,8 +27,8 @@ export default function Upgrade() {
         "Unlock the full potential of crypto market, get access to exclusive investment opportunities, early access to new cryptocurrencies, and expert analysis to help you make informed decisions.",
         "Enjoy advance trading tools, real-time market data, and personalized support to help you make the most of your investments.",
       ],
-      amount: 500,
-      per: 500,
+      amount: 5000,
+      per: 100,
     },
     {
       name: "Silver",
@@ -39,8 +39,8 @@ export default function Upgrade() {
         "Get more bang for your buck, enjoy lower trading fees, higher withdraws limits, and priority customer service compared to out free package, without breaking the bank.",
         "Looking for an affordable way to start cypto, we got you covered, our silver plan is perfect for begineers and easy to use trading tools are provided by us with basic market data and helpful educational resources to get you started and moving.",
       ],
-      amount: 200,
-      per: 200,
+      amount: 1000,
+      per: 60,
     },
     {
       name: "Bronze",
@@ -51,8 +51,8 @@ export default function Upgrade() {
         "Invest in your future, and enjoy lower trading fees and benefits from our educational resources and support to help you build your knowledge and confidence in the crypto market.",
         "Enjoy basic trading tools, real time market data, and access to a limited range of cryptocurriences to help you start building yout portfolio.",
       ],
-      amount: 20,
-      per: 100,
+      amount: 500,
+      per: 30,
     },
   ];
   return (
