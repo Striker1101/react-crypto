@@ -11,9 +11,7 @@ export default function registerJsx() {
           <Link to={"/"}>
             <img className="home" src={logo} alt="logo" />
           </Link>
-          <div className="reg">
-            <h1>REGISTER WITH US </h1>
-          </div>
+          <h1 className="reg">REGISTER WITH US </h1>
         </div>
       </header>
       <main id="mainContent">
