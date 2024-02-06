@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { transactions as trans } from "../../firebaseLog";
+import { transactions as trans, removeField } from "../../firebaseLog";
 import OverallPortfolio from "./overallPortfolio";
 
 export default function Transaction() {
@@ -17,11 +17,21 @@ export default function Transaction() {
 
     fetchTransactions();
   }, [uid]); // Run effect only when uid changes
-  function deleteItem() {
+  function deleteItem(e, index, type) {
     const ask = prompt(
-      "Are you sure about this ? type Yes to continue, click cancel to exit"
+      "Are you sure about this ? type YES to continue, click cancel to exit"
     );
-    console.log(ask);
+    if (ask === "YES") {
+      console.log(index, type);
+
+      if (type === "deposit") {
+        let point = transactions[0].regions[index];
+        removeField("deposits", uid, point);
+      } else {
+        let point = transactions[1].regions[index];
+        removeField("withdraw", uid, point);
+      }
+    }
   }
   return (
     <div>
@@ -58,7 +68,9 @@ export default function Transaction() {
                       {region.status === "pending" ? (
                         <button
                           style={{ color: "red", padding: "5px" }}
-                          onClick={deleteItem}
+                          onClick={(e) =>
+                            deleteItem(e, regionIndex, transaction.type)
+                          }
                         >
                           {" "}
                           Delete

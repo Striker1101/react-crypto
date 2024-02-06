@@ -187,9 +187,9 @@ export async function addDeposit(document, coin, amount) {
     });
 }
 
-export async function removeDeposit(document, data) {
+export async function removeField(collection, document, data) {
   // Add a new document with a generated id.
-  const depositData = doc(db, "deposits", document);
+  const depositData = doc(db, collection, document);
 
   // Atomically add a new region to the "regions" array field.
   await updateDoc(depositData, {
@@ -197,7 +197,7 @@ export async function removeDeposit(document, data) {
   })
     .then(() => {
       // Data saved successfully!
-      console.log("data removed");
+      alert("data removed");
     })
     .catch((error) => {
       // The write failed...
@@ -272,16 +272,15 @@ export async function transactions(uid) {
   const res2 = await getDoc(docRef2);
 
   if (res1.exists()) {
-    console.log(res1.data());
     data.push({ regions: res1.data().regions, type: "deposit" });
   } else {
-    console.log("No deposit found for user with UID:", uid);
+    // console.log("No deposit found for user with UID:", uid);
   }
 
   if (res2.exists()) {
     data.push({ regions: res2.data().regions, type: "withdraw" });
   } else {
-    console.log("No withdraw found for user with UID:", uid);
+    // console.log("No withdraw found for user with UID:", uid);
   }
 
   // Sort the data array by timestamp

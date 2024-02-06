@@ -4,11 +4,7 @@ import Plans from "../components/Plans";
 import close from "../../media/close.svg";
 import Button from "@mui/material/Button";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
-import {
-  appFirebase as app,
-  addDeposit,
-  removeDeposit,
-} from "../../firebaseLog";
+import { appFirebase as app, addDeposit, removeField } from "../../firebaseLog";
 import bitcoin from "../../media/bitcoin.jpeg";
 import dogecoin from "../../media/dogecoin.jpeg";
 import eth from "../../media/eth.jpeg";
@@ -62,7 +58,7 @@ export default function Deposit() {
     // index in array
     let point = data[index];
 
-    removeDeposit(userID, point);
+    removeField("deposits", userID, point);
   }
 
   function handleCoinClick(e) {
@@ -246,12 +242,16 @@ export default function Deposit() {
                             )}
                           </th>
                           <th style={{ cursor: "pointer" }}>
-                            <img
-                              onClick={handleDelete}
-                              src={close}
-                              alt="close"
-                              title="Delete"
-                            />
+                            {e.status === "pending" ? (
+                              <img
+                                onClick={handleDelete}
+                                src={close}
+                                alt="close"
+                                title="Delete"
+                              />
+                            ) : (
+                              "completed"
+                            )}
                           </th>
                         </tr>
                       </>
