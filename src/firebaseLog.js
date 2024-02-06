@@ -179,11 +179,11 @@ export async function addDeposit(document, coin, amount) {
   })
     .then(() => {
       // Data saved successfully!
-      console.log("data saved");
+      alert("data saved");
     })
     .catch((error) => {
       // The write failed...
-      console.log(error);
+      alert(error);
     });
 }
 
@@ -261,4 +261,31 @@ async function check(user) {
       },
     });
   }
+}
+
+export async function transactions(uid) {
+  const data = [];
+  const docRef1 = doc(db, "deposits", uid);
+  const docRef2 = doc(db, "withdraw", uid);
+
+  const res1 = await getDoc(docRef1);
+  const res2 = await getDoc(docRef2);
+
+  if (res1.exists()) {
+    console.log(res1.data());
+    data.push({ regions: res1.data().regions, type: "deposit" });
+  } else {
+    console.log("No deposit found for user with UID:", uid);
+  }
+
+  if (res2.exists()) {
+    data.push({ regions: res2.data().regions, type: "withdraw" });
+  } else {
+    console.log("No withdraw found for user with UID:", uid);
+  }
+
+  // Sort the data array by timestamp
+  data.sort((a, b) => a.timestamp - b.timestamp);
+
+  return data;
 }

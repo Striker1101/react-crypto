@@ -1,6 +1,7 @@
 import React from "react";
 import Earning from "../components/Earning";
-import OverallPortfolio from "../components/overallPortfolio";
+
+import Transaction from "../components/Transaction";
 export default function Homepage({ data }) {
   return (
     <div className="container">
@@ -19,7 +20,7 @@ export default function Homepage({ data }) {
         />
       </div>
       <div className="step two">
-        <OverallPortfolio />
+        <Transaction />
       </div>
     </div>
   );
