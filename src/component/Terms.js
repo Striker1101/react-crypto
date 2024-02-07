@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../media/logo.svg";
+import { Helmet } from 'react-helmet';
+
 export default function Term() {
   return (
     <div>
+       <Helmet>
+        <title>Terms</title>
+        <meta name="description" content="Terms and Conditions" />
+        {/* Add other meta tags as needed */}
+      </Helmet>
       <header>
         <Link to={"/"}>
           <img style={{ width: "50px" }} src={logo} alt="" />

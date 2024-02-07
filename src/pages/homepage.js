@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Nav from "../component/Nav";
 import Container from "../component/Container";
 import "../App.css";
+import { Helmet } from "react-helmet";
 export default function Homepage() {
   useEffect(() => {
     const menuItem = [...document.querySelectorAll(".menu__item")];
@@ -38,6 +39,15 @@ export default function Homepage() {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Homepage </title>
+        <meta
+          name="description"
+          content="Join on today as we go through the metaverse universe today, solving your finially limitaion "
+        />
+        {/* Add other meta tags as needed */}
+      </Helmet>
+
       <Nav />
       <Container />
     </div>

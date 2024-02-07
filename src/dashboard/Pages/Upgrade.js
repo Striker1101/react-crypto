@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import Left from "../../media/left.svg";
 import Upgrade_btc from "../../media/upgrade-btc.jpg";
+import { Helmet } from 'react-helmet';
+
+
 export default function Upgrade() {
   const [toggle, setToggle] = useState(false);
   const pack = useRef("");
@@ -57,6 +60,11 @@ export default function Upgrade() {
   ];
   return (
     <div>
+        <Helmet>
+        <title>Upgrade Plan</title>
+        <meta name="description" content="Take your Trading to the next level with us " />
+        {/* Add other meta tags as needed */}
+      </Helmet>
       {toggle ? (
         <div className="updateCover">
           <div className="updateCard">

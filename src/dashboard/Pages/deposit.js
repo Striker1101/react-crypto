@@ -13,6 +13,8 @@ import pending from "../../media/pending.svg";
 import success from "../../media/sucess.svg";
 import copy from "../../media/copy.svg";
 import empthy from "../../media/empthy.svg";
+import { Helmet } from "react-helmet";
+
 export default function Deposit() {
   const userID = JSON.parse(localStorage.getItem("userID"));
   const db = getFirestore(app());
@@ -84,6 +86,11 @@ export default function Deposit() {
   }
   return (
     <div className="one">
+      <Helmet>
+        <title>Deposit</title>
+        <meta name="description" content="Deposit Page" />
+        {/* Add other meta tags as needed */}
+      </Helmet>
       <div
         style={{
           width: "100%",

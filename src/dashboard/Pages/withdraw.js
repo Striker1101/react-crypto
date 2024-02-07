@@ -6,6 +6,8 @@ import Calculator from "../components/Calculator";
 import Earning from "../components/Earning";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 export default function Withdraw({ data }) {
   const [ask, setAsk] = useState(true);
   const [toggle, setToggle] = useState(null);
@@ -87,6 +89,14 @@ export default function Withdraw({ data }) {
         position: "relative",
       }}
     >
+      <Helmet>
+        <title>Withdraw</title>
+        <meta
+          name="description"
+          content="easily take money from your account "
+        />
+        {/* Add other meta tags as needed */}
+      </Helmet>
       <div className="one">
         <div>
           <Earning

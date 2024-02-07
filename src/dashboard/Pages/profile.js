@@ -4,6 +4,7 @@ import AccountUpgrade from "../components/AccountUpgrade";
 import { Logout } from "../../firebaseLog";
 import { useNavigate } from "react-router-dom";
 import Profile from "../components/Profile";
+import { Helmet } from 'react-helmet';
 
 export default function ProfileTag({ data }) {
   const navigate = useNavigate();
@@ -19,6 +20,11 @@ export default function ProfileTag({ data }) {
         color: "black",
       }}
     >
+       <Helmet>
+        <title>Profile Page</title>
+        <meta name="description" content="User Profile anf Edit " />
+        {/* Add other meta tags as needed */}
+      </Helmet>
       <h2
         style={{
           borderRadius: "20px",

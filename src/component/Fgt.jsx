@@ -2,9 +2,17 @@ import React from "react";
 import logo from "../media/logo (1).svg";
 import media from "../media/rl.svg";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 export default function Fgt() {
   return (
     <div id="container">
+      <Helmet>
+        <title>Forgot Password</title>
+        <meta name="description" content="Retrive Your Password" />
+        {/* Add other meta tags as needed */}
+      </Helmet>
+
       <header id="header">
         <div className="headerContainer">
           <div>

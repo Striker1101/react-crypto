@@ -3,9 +3,17 @@ import "../register.css";
 import logo from "../media/logo (1).svg";
 import img from "../media/rl2.svg";
 import { Link } from "react-router-dom";
+
+import { Helmet } from "react-helmet";
+
 export default function registerJsx() {
   return (
     <div id="container">
+      <Helmet>
+        <title>Register</title>
+        <meta name="description" content="Join us today " />
+        {/* Add other meta tags as needed */}
+      </Helmet>
       <header id="header">
         <div className="headerContainer">
           <Link to={"/"}>
