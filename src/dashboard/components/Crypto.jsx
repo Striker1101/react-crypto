@@ -37,9 +37,9 @@ export default function Crypto({ click, submit }) {
           />
         </label>
 
-        <label htmlFor="address">
-          Address
-          <input onChange={click} type="text" name="address" id="address" />
+        <label htmlFor="wallet">
+          Wallet
+          <input onChange={click} type="text" name="wallet" id="wallet" />
         </label>
         <input type="submit" value="submit" />
       </form>

@@ -4,7 +4,12 @@ import Plans from "../components/Plans";
 import close from "../../media/close.svg";
 import Button from "@mui/material/Button";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
-import { appFirebase as app, addDeposit, removeField } from "../../firebaseLog";
+import {
+  appFirebase as app,
+  addDeposit,
+  removeField,
+  saveTrans,
+} from "../../firebaseLog";
 import bitcoin from "../../media/bitcoin.jpeg";
 import dogecoin from "../../media/dogecoin.jpeg";
 import eth from "../../media/eth.jpeg";
@@ -14,6 +19,7 @@ import success from "../../media/sucess.svg";
 import copy from "../../media/copy.svg";
 import empthy from "../../media/empthy.svg";
 import { Helmet } from "react-helmet";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Deposit() {
   const userID = JSON.parse(localStorage.getItem("userID"));
@@ -40,6 +46,7 @@ export default function Deposit() {
   const coin = useRef("");
   const amount = useRef("");
   const qrIndex = useRef(null);
+  const uid = JSON.parse(localStorage.getItem("userID"));
   const wallet = [
     //wallets address
     "bc1q26zexey8443srz2c0rg7qp2dskjsree7zxmvty",
@@ -54,6 +61,17 @@ export default function Deposit() {
     trnx,
     eth,
   ];
+
+  const [datas, setDatas] = useState({
+    id: uuidv4(),
+    amount: "",
+    coin: "",
+    wallet: "",
+    status: "pending",
+    img: "",
+    description: "direct deposit",
+  });
+
   function handleDelete(e) {
     let index =
       e.currentTarget.parentElement.parentElement.getAttribute("data-index");
@@ -67,13 +85,34 @@ export default function Deposit() {
     qrIndex.current = e.currentTarget.getAttribute("data-index");
     setCoins(!coins);
     coin.current = e.currentTarget.getAttribute("data-name");
+
+    setDatas({
+      ...datas,
+      coin: coin.current,
+      wallet: wallet[qrIndex.current],
+    });
   }
 
   function handlePlanClick(e) {
     setPlans(!plans);
     setqrCode(true);
     amount.current = e.currentTarget.getAttribute("data-amount");
-    addDeposit(userID, coin.current, amount.current);
+
+    setDatas({
+      ...datas,
+      amount: amount.current,
+    });
+    datas.amount = amount.current;
+
+    try {
+      saveTrans("deposits", uid, datas).then((res) => {
+        alert(`deposit ${datas.id} is sucessfull`);
+      });
+    } catch (error) {
+      alert(
+        "possible error on withdraw, please contact support on crytogram-universal.hotmail.com"
+      );
+    }
   }
 
   function copied() {
@@ -84,6 +123,8 @@ export default function Deposit() {
     document.execCommand("copy");
     window.getSelection().removeAllRanges(); // to deselect
   }
+
+  function upload(e) {}
   return (
     <div className="one">
       <Helmet>
@@ -223,15 +264,23 @@ export default function Deposit() {
                           <th> {e.coin}</th>
                           <th>{e.amount}</th>
                           <th>
-                            <Button variant="contained" component="label">
-                              Upload
-                              <input
-                                hidden
-                                accept="image/*"
-                                multiple
-                                type="file"
-                              />
-                            </Button>
+                            {e.status !== "pending" ? (
+                              "Approved"
+                            ) : (
+                              <Button
+                                onClick={(e) => upload(e)}
+                                variant="contained"
+                                component="label"
+                              >
+                                Upload
+                                <input
+                                  hidden
+                                  accept="image/*"
+                                  multiple
+                                  type="file"
+                                />
+                              </Button>
+                            )}
                           </th>
                           <th>
                             {e.status === "pending" ? (

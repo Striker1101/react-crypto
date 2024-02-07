@@ -29,8 +29,8 @@ export default function Homepage() {
           alignItems: "center",
         }}
       >
-        <TechnocalChat width={width.current} />
         <CoinWatch />
+        <TechnocalChat width={width.current} />
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { transactions as trans, removeField } from "../../firebaseLog";
 import OverallPortfolio from "./overallPortfolio";
 

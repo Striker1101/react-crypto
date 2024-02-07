@@ -187,6 +187,28 @@ export async function addDeposit(document, coin, amount) {
     });
 }
 
+export async function saveTrans(collection, document, data) {
+  const timestamp = Timestamp.fromDate(new Date());
+  // Add a new document with a generated id.
+  const trans = doc(db, collection, document);
+
+  // Atomically add a new region to the "regions" array field.
+  await updateDoc(trans, {
+    regions: arrayUnion({
+      ...data,
+      time: timestamp,
+    }),
+  })
+    .then(() => {
+      // Data saved successfully!
+      return { status: 200, message: "success" };
+    })
+    .catch((error) => {
+      // The write failed...
+      return { status: 400, message: error };
+    });
+}
+
 export async function removeField(collection, document, data) {
   // Add a new document with a generated id.
   const depositData = doc(db, collection, document);
@@ -216,6 +238,7 @@ export async function Logout() {
       // An error happened.
     });
 }
+
 async function check(user) {
   const docRef = doc(db, "deposits", user.uid);
   const docSnap = await getDoc(docRef);
@@ -287,4 +310,16 @@ export async function transactions(uid) {
   data.sort((a, b) => a.timestamp - b.timestamp);
 
   return data;
+}
+
+export async function getUserDetails(uid) {
+  const docRef1 = doc(db, "accounts", uid);
+
+  const res1 = await getDoc(docRef1);
+
+  if (res1.exists()) {
+    return res1.data().log;
+  } else {
+    console.log("No deposit found for user with UID:", uid);
+  }
 }

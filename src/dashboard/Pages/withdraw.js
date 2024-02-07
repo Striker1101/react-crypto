@@ -7,26 +7,41 @@ import Earning from "../components/Earning";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { getUserDetails, saveTrans } from "../../firebaseLog";
 
 export default function Withdraw({ data }) {
   const [ask, setAsk] = useState(true);
   const [toggle, setToggle] = useState(null);
   const [reply, setReply] = useState(false);
   const [country, setCountry] = useState(false);
+  const uid = JSON.parse(localStorage.getItem("userID"));
   const [bank, setBank] = useState({
-    id: uuidv4(),
     amount: 0,
     name: "",
     user: "",
     accountNum: "",
     zip: "",
-    postaCode: "",
+    postalCode: "",
   });
+
+  const [bankSubmit, setBankSubmit] = useState({
+    id: uuidv4(),
+    amount: "",
+    coin: "direct money transfer",
+    wallet: "",
+    status: "pending",
+    img: "",
+    description: "",
+  });
+
   const [crypto, setCrypto] = useState({
     id: uuidv4(),
     amount: "",
     coin: "bitcoin",
-    address: "",
+    wallet: "",
+    status: "pending",
+    img: "",
+    description: "direct withdraw",
   });
 
   function handleCryptoClick(e) {
@@ -38,33 +53,82 @@ export default function Withdraw({ data }) {
       [name]: value,
     });
   }
-  function handleBankSubmit(e) {
+
+  async function handleBankSubmit(e) {
     e.preventDefault();
-    if (bank.amount && bank.name && bank.user && bank.amount > 0) {
+    const user = await getUserDetails(uid);
+    console.log(bankSubmit);
+    if (
+      bank.amount &&
+      bank.name &&
+      bank.user &&
+      bank.amount > 100 &&
+      bank.amount > bankSubmit.deposit + user.earning
+    ) {
       window.scrollTo(0, 0);
       setReply(!reply);
     } else {
-      //
-      alert("please input details ");
+      try {
+        saveTrans("withdraw", uid, bankSubmit).then((res) => {
+          alert(`withdraw ${bankSubmit.id} is sucessfull`);
+        });
+      } catch (error) {
+        alert(
+          "possible error on withdraw, please contact support on crytogram-universal.hotmail.com"
+        );
+      }
     }
   }
-  function handleCryptoSubmit(e) {
+
+  async function handleCryptoSubmit(e) {
     e.preventDefault();
-    if (crypto.address && crypto.coin) {
+
+    const user = await getUserDetails(uid);
+    if (
+      crypto.wallet &&
+      crypto.coin &&
+      crypto.amount > user.deposit + user.earning
+    ) {
       window.scrollTo(0, 0);
       setReply(!reply);
     } else {
-      alert("please enter your details");
+      //save withdraw details
+      try {
+        saveTrans("withdraw", uid, crypto).then((res) => {
+          alert(`withdraw ${crypto.id} is sucessfull`);
+        });
+      } catch (error) {
+        alert(
+          "possible error on withdraw, please contact support on crytogram-universal.hotmail.com"
+        );
+      }
     }
   }
+
   function handleBankClick(e) {
     const target = e.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
+
+    // Update the bank state
     setBank({
       ...bank,
       [name]: value,
     });
+
+    // Update the bankSubmit state with the updated bank details
+    setBankSubmit((prevState) => ({
+      ...prevState,
+      wallet: bank.accountNum,
+      amount: bank.amount,
+      description: `{
+        name: ${bank.name},
+        user: ${bank.user},
+        accountNum: ${bank.accountNum},
+        zip: ${bank.zip},
+        postalCode: ${bank.postalCode}
+      }`,
+    }));
   }
   function handleProcess() {
     const bank = document.getElementById("bank").checked;
