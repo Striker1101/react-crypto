@@ -5,22 +5,22 @@ export default function Plans({ handleClick }) {
     {
       name: "bronze",
       per: "30%",
-      amount: "$300",
+      amount: "$5000",
     },
     {
       name: "silver",
       per: "60%",
-      amount: "$500",
+      amount: "$15000",
     },
     {
       name: "gold",
       per: "100%",
-      amount: "$1100",
+      amount: "$50000",
     },
     {
       name: "premium",
-      per: "500%",
-      amount: "$1500",
+      per: "200%",
+      amount: "unlimited",
     },
   ];
   return (
