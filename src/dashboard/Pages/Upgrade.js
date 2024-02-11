@@ -42,7 +42,7 @@ export default function Upgrade() {
         "Get more bang for your buck, enjoy lower trading fees, higher withdraws limits, and priority customer service compared to out free package, without breaking the bank.",
         "Looking for an affordable way to start cypto, we got you covered, our silver plan is perfect for begineers and easy to use trading tools are provided by us with basic market data and helpful educational resources to get you started and moving.",
       ],
-      amount: 1000,
+      amount: 1500,
       per: 60,
     },
     {
